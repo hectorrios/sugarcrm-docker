@@ -22,6 +22,10 @@ RUN apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
+RUN apt-get update && apt-get install -y \
+        git \
+        git man
+
 ## Install imap
 RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install imap
@@ -66,11 +70,11 @@ RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
 COPY ./docker/config/php/99-xdebug.ini /usr/local/etc/php/conf.d/
 
-# Install XHProf
-RUN pecl install -o -f xhprof-beta \
-   docker-php-ext-enable xhprof \ 
-   && rm -rf /tmp/pear
-
+## Install XHProf
+RUN pecl install -o -f xhprof-beta && \
+    rm -rf /tmp/pear
+COPY ./docker/config/php/xhprof.ini /usr/local/etc/php/conf.d/
+# RUN docker-php-ext-enable xhprof
 
 # Composer
 ## Set environment variables
