@@ -66,6 +66,12 @@ RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
 COPY ./docker/config/php/99-xdebug.ini /usr/local/etc/php/conf.d/
 
+# Install XHProf
+RUN pecl install -o -f xhprof-beta \
+   docker-php-ext-enable xhprof \ 
+   && rm -rf /tmp/pear
+
+
 # Composer
 ## Set environment variables
 ENV COMPOSER_HOME /root/composer
