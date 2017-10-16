@@ -80,9 +80,6 @@ COPY ./docker/config/php/xhprof.ini /usr/local/etc/php/conf.d/
 ## Set environment variables
 ENV COMPOSER_HOME /root/composer
 
-## Composer expects to have these available
-RUN apt-get install -y git
-
 ## Install
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
