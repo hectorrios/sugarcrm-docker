@@ -31,7 +31,7 @@ RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install imap
 
 ## A few easy to install dependencies
-RUN docker-php-ext-install iconv mcrypt json
+RUN docker-php-ext-install iconv mcrypt json pcntl
 
 ## Install Zip extension and it's dependencies
 RUN apt-get install -y zlib1g zlib1g-dev
